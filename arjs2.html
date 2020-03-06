@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>ActiveReportsJS Viewer</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="./node_modules/@grapecity/activereports/styles/ar-js-viewer.css" />
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports/dist/ie-polyfills.js"></script>
+    <!--to run in IE-->
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports/dist/ar-js-core.js"></script>
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports-localization/dist/ar-js-locales.js"></script>
+
+</head>
+
+<body onload="load()">
+    <div id="ARJSviewerDiv" style="height: 700px"></div>
+    <script>
+        function load() {
+            const rdlxjson = '/reports/Label_page2.rdlx-json';
+            const viewer = new ActiveReports.Viewer('#ARJSviewerDiv', {
+                language: 'ja'
+            });
+            const report = new GC.ActiveReports.Core.PageReport();
+
+            // ActiveReportsJS
+            report
+                .load(rdlxjson)
+                .then(function () {
+                    return report.load(report._instance.definition);
+                })
+                .then(function () {
+                    report.run();
+                    viewer.open(report);
+                }); 
+        }
+    </script>
+</body>
+
+</html>

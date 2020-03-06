@@ -1,0 +1,22 @@
+{
+  "name": "arjs-webapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "jsonapi": "json-server --watch db.json",
+    "express": "node ./server.js",
+    "all": "json-server --watch db.json & node ./server.js"
+  },
+  "keywords": [],
+  "author": "GrapeCity",
+  "license": "ISC",
+  "dependencies": {
+    "@grapecity/activereports": "^1.1.0",
+    "@grapecity/activereports-localization": "^1.1.0"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "json-server": "^0.16.0"
+  }
+}

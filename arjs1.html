@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>ActiveReportsJS Viewer</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="./node_modules/@grapecity/activereports/styles/ar-js-viewer.css" />
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports/dist/ie-polyfills.js"></script>
+    <!--to run in IE-->
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports-localization/dist/ar-js-locales.js"></script>
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports/dist/ar-js-core.js"></script>
+    <script type="text/javascript" src="./node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
+
+</head>
+ 
+<body onload="load()">
+    <div id="ARJSviewerDiv" style="height: 700px"></div>
+    <script>
+        function load() {
+            const rdlxjson = '/reports/Label_page.rdlx-json';
+            const apiurl = 'http://localhost:3000/Customers'; 
+//            const apiurl = 'http://localhost:3000/Customers/?CustomerID=1'; //IDを指定して1件だけ表示
+            const viewer = new ActiveReports.Viewer('#ARJSviewerDiv', {
+                language: 'ja'
+            });
+            const report = new GC.ActiveReports.Core.PageReport();
+
+            // データを取得 
+            let connStr;
+            fetch(apiurl)  // 全データ
+                .then((res) => res.json())
+                .then((customers) => {
+                    // 接続文字列としてJSON文字列を設定する
+                    connStr = 'jsondata = ' + JSON.stringify(customers);
+                })
+                .catch((err) => console.log(err))
+
+            // ActiveReportsJS
+            report
+                .load(rdlxjson)
+                .then(function () {
+                    report._instance.definition.DataSources[0].ConnectionProperties.ConnectString = connStr;
+                    return report.load(report._instance.definition);
+                })
+                .then(function () {
+                    report.run();
+                    viewer.open(report);
+                });
+        }
+    </script>
+</body>
+
+</html>
