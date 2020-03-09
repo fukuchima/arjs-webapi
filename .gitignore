@@ -266,3 +266,4 @@ result.pdf
 License*.*
 LicenseManager.cs
 .vscode/
+package-lock.json

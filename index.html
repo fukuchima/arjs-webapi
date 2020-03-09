@@ -11,11 +11,14 @@
 <body>
     <div id='link'>
         <p>ActiveReportsJSサンプル</p>
-        <a href='arjs1.html'>Fetch APIでWeb APIを指定</a><br />
-        <a href='arjs2.html'>帳票定義情報にWeb APIを設定</a>
+        <ul> 
+            <li><a href='arjs1.html'>Fetch APIでWeb APIを指定（要 ローカルサーバー起動）</a></li>
+            <li><a href='arjs2.html'>帳票定義情報にWeb APIを設定（要 ローカルサーバー起動）</a></li>
+            <li><a href='arjs3.html'>Web APIでデータを取得して表示（要 インターネット接続） </a></li>
+        </ul>
     </div>
     <div id='note'>
-        NOTE:ローカル環境でjson-serverを利用したデモ。実行する前にサーバーの起動が必要
+        NOTE:ローカルサーバー起動。ローカル環境でjson-serverを利用してWeb APIを提供。以下のコマンドで実行する前にサーバーの起動が必要
         <code> > npm run jsonapi</code>
     </div>
 </body>
